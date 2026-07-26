@@ -1,9 +1,11 @@
 fastapi
 uvicorn
-pydantic
-
-python-multipart
-pypdf
-openai
 chromadb
-python-dotenv
+pypdf
+ollama
+langchain-text-splitters
+pydantic
+python-multipart
+sentence-transformers
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch

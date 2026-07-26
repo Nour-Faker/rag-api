@@ -1,0 +1,15 @@
+services:
+  rag-api:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./chroma_db:/app/chroma_db
+      - huggingface_cache:/root/.cache/huggingface
+    environment:
+      - PYTHONUNBUFFERED=1
+      - OLLAMA_HOST=http://host.docker.internal:11434
+    restart: unless-stopped
+
+volumes:
+  huggingface_cache:

@@ -1,15 +1,11 @@
 from typing import List
-
-def chunk_text(text:str,chunk_size:int=500,overlap:int=50)-> List[str]:
-    words=text.split()
-    chunks=[]
-
-    start=0
-    while start<len(words):
-        end=start+chunk_size
-        chunk=" ".join(words[start:end])
-        chunks.append(chunk)
-        start+=chunk_size-overlap
-
-    return chunks
-
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+def chunk_text(text: str, chunk_size: int = 500, overlap: int = 50) -> List[str]:
+    splitter = RecursiveCharacterTextSplitter(
+        chunk_size=chunk_size,
+        chunk_overlap=overlap,
+        separators=["\n\n", "\n", ". ", " ", ""]
+    )
+    chunks = splitter.split_text(text)
+    # Filter out empty or very short chunks
+    return [c.strip() for c in chunks if len(c.strip()) > 50]
